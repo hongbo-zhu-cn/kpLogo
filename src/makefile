@@ -36,7 +36,7 @@ kpLogo: sequence.o markov.o positional_kmer.o container.o utility.o text.o stat.
 .c.o:
 	gcc -O3 $(INCLUDES) -c $< -o $@	
 
-install:
+install: $(PROGS)
 	cp $(PROGS) ../bin
 	mv $(PROGS) ../web/$(PROGS)
 
