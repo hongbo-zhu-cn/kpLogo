@@ -1108,6 +1108,18 @@ WriteFasta(seqs1,"implanted.fa");
 	// remove kmers overlapping with fixed positions
 	remove_kmers_overlapping_with_fixed_positions(outtmp,fixed_position,startPos);
 	
+	// if nothing is left after removing duplicates, return
+    ifstream fin_tmp(outtmp.c_str());
+	string line;
+    long line_count = 0;
+    while (getline(fin_tmp, line))
+        ++line_count;
+    if (line_count == 0) 
+    {
+        message("None left after removing kmers overlapping with fixed positions ..."); 
+        return 0;
+    }
+
 	// sort output by p.value
 	system_run("sort -k5,5gr "+outtmp+" > "+out);
 
